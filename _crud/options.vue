@@ -1,0 +1,124 @@
+<template></template>
+<script>
+
+export default {
+  data() {
+    return {
+      crudId: this.$uid()
+    };
+  },
+  computed: {
+    //'price', 'parent_id', 'pieces', 'need_cutting', 'is_editable'
+    crudData() {
+      return {
+        crudId: this.crudId,
+        apiRoute: 'apiRoutes.qshoe.options',
+        permission: 'ishoe.options',
+        create: {
+          title: this.$tr('ishoe.cms.newOption')
+        },
+        read: {
+          columns: [
+            { name: 'id', label: this.$tr('isite.cms.form.id'), field: 'id', style: 'width: 50px' },
+            { name: 'title', label: this.$tr('isite.cms.form.title'), field: 'title', align: 'rigth' },
+            {
+              name: 'parent', label: this.$tr('isite.cms.form.parent'), field: 'parent', align: 'left',
+              format: val => val ? (val.title ? val.title : '-') : '-'
+            },
+            { name: 'pieces', label: this.$trp('ishoe.cms.piece'), field: 'pieces', align: 'left' },
+            {
+              name: 'needCutting',
+              label: this.$tr('ishoe.cms.needCutting'),
+              field: 'needCutting',
+              align: 'left',
+              format: val => val ? this.$tr('isite.cms.label.yes') : this.$tr('isite.cms.label.no')
+            },
+            {
+              name: 'isEditable',
+              label: this.$tr('ishoe.cms.isEditable'),
+              field: 'isEditable',
+              align: 'left',
+              format: val => val ? this.$tr('isite.cms.label.yes') : this.$tr('isite.cms.label.no')
+            },
+            {
+              name: 'created_at', label: this.$tr('isite.cms.form.createdAt'), field: 'createdAt', align: 'left',
+              format: val => val ? this.$trd(val) : '-'
+            },
+            { name: 'actions', label: this.$tr('isite.cms.form.actions'), align: 'left' }
+          ],
+          requestParams: { include: 'parent.translations,translations' }
+        },
+        update: {
+          title: this.$tr('ishoe.cms.updateOption'),
+          requestParams: { include: 'parent,translations' }
+        },
+        delete: true,
+        formLeft: {
+          id: { value: '' },
+          userId: { value: this.$store.state.quserAuth.userId },
+          title: {
+            value: '',
+            type: 'input',
+            isTranslatable: true,
+            props: {
+              label: `${this.$tr('isite.cms.form.title')}*`,
+              rules: [
+                val => !!val || this.$tr('isite.cms.message.fieldRequired')
+              ]
+            }
+          },
+          parentId: {
+            value: null,
+            type: 'treeSelect',
+            props: {
+              label: this.$tr('isite.cms.form.parent')
+            },
+            loadOptions: {
+              apiRoute: 'apiRoutes.qshoe.options',
+              requestParams: {include: 'translations'},
+              select: {label: 'title', id: 'id'}
+            }
+          },
+          pieces: {
+            value: '0',
+            type: 'input',
+            props: {
+              label: `${this.$trp('ishoe.cms.piece')}*`,
+              type: 'number',
+              rules: [
+                val => !!val || this.$tr('isite.cms.message.fieldRequired')
+              ]
+            }
+          },
+          needCutting: {
+            value: '0',
+            type: 'select',
+            props: {
+              label: this.$tr('ishoe.cms.needCutting'),
+              options: [
+                { label: this.$tr('isite.cms.label.yes'), value: '1' },
+                { label: this.$tr('isite.cms.label.no'), value: '0' }
+              ]
+            }
+          },
+          isEditable: {
+            value: '0',
+            type: 'select',
+            props: {
+              label: this.$tr('ishoe.cms.isEditable'),
+              options: [
+                { label: this.$tr('isite.cms.label.yes'), value: '1' },
+                { label: this.$tr('isite.cms.label.no'), value: '0' }
+              ]
+            }
+          }
+        }
+      };
+    },
+    //Crud info
+    crudInfo() {
+      return this.$store.state.qcrudComponent.component[this.crudId] || {};
+    }
+  }
+};
+</script>
