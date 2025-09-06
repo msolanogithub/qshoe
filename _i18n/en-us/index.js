@@ -12,7 +12,8 @@ export default {
       'updateOption': 'Update Option',
       'piece': 'Piece | Pieces',
       'needCutting': 'Need Cutting',
-      'isEditable': 'Is Editable'
+      'isEditable': 'Is Editable',
+      'price': 'Price'
     }
   }
 };

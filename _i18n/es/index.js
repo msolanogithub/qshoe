@@ -12,7 +12,8 @@ export default {
       'updateOption': 'Actualizar Opción',
       'piece': 'Pieza | Piezas',
       'needCutting': 'Necesita Corte',
-      'isEditable': 'Es Editable'
+      'isEditable': 'Es Editable',
+      'price': 'Precio'
     }
   }
 };

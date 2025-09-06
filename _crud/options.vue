@@ -25,6 +25,10 @@ export default {
               name: 'parent', label: this.$tr('isite.cms.form.parent'), field: 'parent', align: 'left',
               format: val => val ? (val.title ? val.title : '-') : '-'
             },
+            {
+              name: 'price', label: this.$trp('ishoe.cms.price'), field: 'price', align: 'left',
+              format: val => this.$trn(val)
+            },
             { name: 'pieces', label: this.$trp('ishoe.cms.piece'), field: 'pieces', align: 'left' },
             {
               name: 'needCutting',
@@ -46,7 +50,21 @@ export default {
             },
             { name: 'actions', label: this.$tr('isite.cms.form.actions'), align: 'left' }
           ],
-          requestParams: { include: 'parent.translations,translations' }
+          requestParams: { include: 'parent.translations,translations' },
+          filters: {
+            parentId: {
+              value: null,
+              type: 'treeSelect',
+              props: {
+                label: this.$tr('isite.cms.form.parent')
+              },
+              loadOptions: {
+                apiRoute: 'apiRoutes.qshoe.options',
+                requestParams: { include: 'translations' },
+                select: { label: 'title', id: 'id' }
+              }
+            },
+          }
         },
         update: {
           title: this.$tr('ishoe.cms.updateOption'),
@@ -75,8 +93,22 @@ export default {
             },
             loadOptions: {
               apiRoute: 'apiRoutes.qshoe.options',
-              requestParams: {include: 'translations'},
-              select: {label: 'title', id: 'id'}
+              requestParams: { include: 'translations' },
+              select: { label: 'title', id: 'id' }
+            }
+          },
+          price: {
+            value: '0',
+            type: 'input',
+            props: {
+              label: `${this.$tr('ishoe.cms.price')}*`,
+              type: 'number',
+              rules: [
+                val => {
+                  const n = parseInt(val)
+                  return (!isNaN(n) && n >= 0) || this.$tr('isite.cms.message.fieldRequired')
+                }
+              ]
             }
           },
           pieces: {
@@ -86,7 +118,10 @@ export default {
               label: `${this.$trp('ishoe.cms.piece')}*`,
               type: 'number',
               rules: [
-                val => !!val || this.$tr('isite.cms.message.fieldRequired')
+                val => {
+                  const n = parseInt(val)
+                  return (!isNaN(n) && n >= 0) || this.$tr('isite.cms.message.fieldRequired')
+                }
               ]
             }
           },
