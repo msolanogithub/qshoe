@@ -13,7 +13,10 @@ export default {
       'piece': 'Piece | Pieces',
       'needCutting': 'Need Cutting',
       'isEditable': 'Is Editable',
-      'price': 'Price'
+      'basePrice': 'Base Price',
+      'optionsPrice': 'Options Price',
+      'totalPrice': 'Total Price',
+      'reference': 'Referencia'
     }
   }
 };
