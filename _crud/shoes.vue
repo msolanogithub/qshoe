@@ -73,7 +73,7 @@ export default {
             value: '0',
             type: 'input',
             props: {
-              label: `${this.$tr('ishoe.cms.price')}*`,
+              label: `${this.$tr('ishoe.cms.basePrice')}*`,
               type: 'number',
               rules: [
                 val => {
