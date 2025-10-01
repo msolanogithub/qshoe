@@ -38,7 +38,7 @@ export default {
             },
             { name: 'actions', label: this.$tr('isite.cms.form.actions'), align: 'left' }
           ],
-          requestParams: { include: 'translations' }
+          requestParams: { include: 'translations,files' }
         },
         update: {
           title: this.$tr('ishoe.cms.updateShoe'),
@@ -103,6 +103,19 @@ export default {
               }
             }
           }
+        },
+        formRight: {
+          mediasSingle: {
+            name: 'mediasSingle',
+            value: {},
+            type: 'media',
+            props: {
+              label: this.$tr('isite.cms.form.firstImage'),
+              zone: 'mainimage',
+              entity: "Modules\\Ishoe\\Models\\Shoe",
+              entityId: null
+            }
+          },
         }
       };
     },

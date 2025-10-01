@@ -26,10 +26,10 @@ export default {
               format: val => val ? (val.title ? val.title : '-') : '-'
             },
             {
-              name: 'price', label: this.$trp('ishoe.cms.price'), field: 'price', align: 'left',
+              name: 'price', label: this.$tr('isite.cms.form.price'), field: 'price', align: 'left',
               format: val => this.$trn(val)
             },
-            { name: 'pieces', label: this.$trp('ishoe.cms.piece'), field: 'pieces', align: 'left' },
+            /*{ name: 'pieces', label: this.$trp('ishoe.cms.piece'), field: 'pieces', align: 'left' },
             {
               name: 'needCutting',
               label: this.$tr('ishoe.cms.needCutting'),
@@ -43,7 +43,7 @@ export default {
               field: 'isEditable',
               align: 'left',
               format: val => val ? this.$tr('isite.cms.label.yes') : this.$tr('isite.cms.label.no')
-            },
+            },*/
             {
               name: 'created_at', label: this.$tr('isite.cms.form.createdAt'), field: 'createdAt', align: 'left',
               format: val => val ? this.$trd(val) : '-'
@@ -54,16 +54,20 @@ export default {
           filters: {
             parentId: {
               value: null,
-              type: 'treeSelect',
+              type: 'select',
               props: {
-                label: this.$tr('isite.cms.form.parent')
+                label: this.$tr('isite.cms.form.parent'),
+                clearable: true,
               },
               loadOptions: {
                 apiRoute: 'apiRoutes.qshoe.options',
-                requestParams: { include: 'translations' },
+                requestParams: {
+                  include: 'translations',
+                  filter: { parentId: { where: 'where', value: 0 } }
+                },
                 select: { label: 'title', id: 'id' }
               }
-            },
+            }
           }
         },
         update: {
@@ -87,13 +91,17 @@ export default {
           },
           parentId: {
             value: null,
-            type: 'treeSelect',
+            type: 'select',
             props: {
-              label: this.$tr('isite.cms.form.parent')
+              label: this.$tr('isite.cms.form.parent'),
+              clearable: true
             },
             loadOptions: {
               apiRoute: 'apiRoutes.qshoe.options',
-              requestParams: { include: 'translations' },
+              requestParams: {
+                include: 'translations',
+                filter: { parentId: { where: 'where', value: 0 } }
+              },
               select: { label: 'title', id: 'id' }
             }
           },
@@ -101,12 +109,12 @@ export default {
             value: '0',
             type: 'input',
             props: {
-              label: `${this.$tr('ishoe.cms.price')}*`,
+              label: `${this.$tr('isite.cms.form.price')}*`,
               type: 'number',
               rules: [
                 val => {
-                  const n = parseInt(val)
-                  return (!isNaN(n) && n >= 0) || this.$tr('isite.cms.message.fieldRequired')
+                  const n = parseInt(val);
+                  return (!isNaN(n) && n >= 0) || this.$tr('isite.cms.message.fieldRequired');
                 }
               ]
             }
@@ -119,8 +127,8 @@ export default {
               type: 'number',
               rules: [
                 val => {
-                  const n = parseInt(val)
-                  return (!isNaN(n) && n >= 0) || this.$tr('isite.cms.message.fieldRequired')
+                  const n = parseInt(val);
+                  return (!isNaN(n) && n >= 0) || this.$tr('isite.cms.message.fieldRequired');
                 }
               ]
             }

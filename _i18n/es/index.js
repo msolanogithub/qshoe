@@ -16,7 +16,7 @@ export default {
       'basePrice': 'Precio Base',
       'optionsPrice': 'Precio de Opciones',
       'totalPrice': 'Precio Total',
-      'reference': 'Refrence'
+      'reference': 'Referencía'
     }
   }
 };
