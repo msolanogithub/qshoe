@@ -2,14 +2,14 @@ export default {
   'ishoe': {
     'cms': {
       'sidebar': {
-        'adminGroup': 'Zapatos',
-        'adminShoes': 'Zapatos',
-        'adminOptions': 'Opciones'
+        'adminGroup': 'Botas',
+        'adminShoes': 'Botas',
+        'adminOptions': 'Caracteristicas'
       },
-      'newShoe': 'Nuevo Zapato',
-      'updateShoe': 'Actualizar Zapato',
-      'newOption': 'Nueva Opción',
-      'updateOption': 'Actualizar Opción',
+      'newShoe': 'Nueva Bota',
+      'updateShoe': 'Actualizar Bota',
+      'newOption': 'Nueva Caracteristica',
+      'updateOption': 'Actualizar Caracteristica',
       'piece': 'Pieza | Piezas',
       'needCutting': 'Necesita Corte',
       'isEditable': 'Es Editable',
